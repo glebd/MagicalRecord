@@ -937,17 +937,17 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C721C86F13D0C7030097AB6F /* NSManagedObjectContext+MagicalRecord.m in Sources */,
+				C721C87713D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
+				C75A4E7313D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m in Sources */,
 				C721C86913D0C7030097AB6F /* MRCoreDataAction.m in Sources */,
 				C721C86D13D0C7030097AB6F /* NSManagedObject+MagicalRecord.m in Sources */,
-				C721C86F13D0C7030097AB6F /* NSManagedObjectContext+MagicalRecord.m in Sources */,
 				C721C87113D0C7030097AB6F /* NSManagedObjectModel+MagicalRecord.m in Sources */,
 				C721C87313D0C7030097AB6F /* NSPersistentStore+MagicalRecord.m in Sources */,
 				C721C87513D0C7030097AB6F /* NSPersistentStoreCoordinator+MagicalRecord.m in Sources */,
-				C721C87713D0C7030097AB6F /* MagicalRecordHelpers.m in Sources */,
 				C77E5FA813D0CBDE00298F87 /* MagicalRecordHelperTests.m in Sources */,
 				C77E5FB813D0D25100298F87 /* ImportSingleEntityWithNoRelationshipsTests.m in Sources */,
 				C77E5FBB13D0D2AE00298F87 /* FixtureHelpers.m in Sources */,
-				C75A4E7313D0D88D00790CEB /* NSManagedObject+MagicalDataImport.m in Sources */,
 				C70B6E7113D0F62500709450 /* NSPersisentStoreHelperTests.m in Sources */,
 				C70B6E7413D0F64000709450 /* NSPersistentStoreCoordinatorHelperTests.m in Sources */,
 				C70B6E7713D0F66000709450 /* NSManagedObjectModelHelperTests.m in Sources */,
@@ -1027,16 +1027,20 @@
 		C721C7A713D0A3750097AB6F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.6;
+				SDKROOT = "";
 			};
 			name = Debug;
 		};
 		C721C7A813D0A3750097AB6F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				IPHONEOS_DEPLOYMENT_TARGET = 4.3;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx10.6;
+				SDKROOT = "";
 			};
 			name = Release;
 		};
@@ -1133,7 +1137,8 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
 				CLANG_ENABLE_OBJC_ARC = NO;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1173,6 +1178,8 @@
 					"-lstdc++",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				"PROVISIONING_PROFILE[sdk=iphoneos*]" = "";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				WRAPPER_EXTENSION = app;
