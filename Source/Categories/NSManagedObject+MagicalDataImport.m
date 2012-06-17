@@ -149,61 +149,61 @@ NSString * const kMagicalRecordImportRelationshipTypeKey = @"type";
 
 - (void) MR_importValuesForKeysWithDictionary:(NSDictionary *)objectData
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     
-    NSDictionary *attributes = [[self entity] attributesByName];
-    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
-    
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships
-        forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
-     {
-         NSManagedObject *relatedObject = nil;
-         if ([objectData isKindOfClass:[NSDictionary class]]) 
+        NSDictionary *attributes = [[self entity] attributesByName];
+        [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
+        
+        NSDictionary *relationships = [[self entity] relationshipsByName];
+        [self MR_setRelationships:relationships
+            forKeysWithDictionary:objectData 
+                        withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
          {
-             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity] withDictionary:objectData];
-         }
-         else
-         {
-             relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
-         }
-         [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             NSManagedObject *relatedObject = nil;
+             if ([objectData isKindOfClass:[NSDictionary class]]) 
+             {
+                 relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity] withDictionary:objectData];
+             }
+             else
+             {
+                 relatedObject = [self MR_findObjectForRelationship:relationshipInfo withData:objectData];
+             }
+             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
 
-         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-     }];
+             [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+         }];
     
-    [pool drain];
+    }
 }
 
 - (void) MR_updateValuesForKeysWithDictionary:(NSDictionary *)objectData
 {
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+    @autoreleasepool {
     
-    NSDictionary *attributes = [[self entity] attributesByName];
-    [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
-    
-    NSDictionary *relationships = [[self entity] relationshipsByName];
-    [self MR_setRelationships:relationships
-        forKeysWithDictionary:objectData 
-                    withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
-     {
-         NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
-                                                                    withData:objectData];
-         if (relatedObject == nil)
+        NSDictionary *attributes = [[self entity] attributesByName];
+        [self MR_setAttributes:attributes forKeysWithDictionary:objectData];
+        
+        NSDictionary *relationships = [[self entity] relationshipsByName];
+        [self MR_setRelationships:relationships
+            forKeysWithDictionary:objectData 
+                        withBlock:^(NSRelationshipDescription *relationshipInfo, id objectData)
          {
-             relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity]
-                                               withDictionary:objectData];
-         }
-         else
-         {
-             [relatedObject MR_importValuesForKeysWithDictionary:objectData];
-         }
-         
-         [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
-     }];
+             NSManagedObject *relatedObject = [self MR_findObjectForRelationship:relationshipInfo
+                                                                        withData:objectData];
+             if (relatedObject == nil)
+             {
+                 relatedObject = [self MR_createInstanceForEntity:[relationshipInfo destinationEntity]
+                                                   withDictionary:objectData];
+             }
+             else
+             {
+                 [relatedObject MR_importValuesForKeysWithDictionary:objectData];
+             }
+             
+             [self MR_addObject:relatedObject forRelationship:relationshipInfo];            
+         }];
     
-    [pool drain];
+    }
 }
 
 + (id) MR_importFromDictionary:(NSDictionary *)objectData inContext:(NSManagedObjectContext *)context;

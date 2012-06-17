@@ -25,8 +25,6 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (void) MR_setDefaultManagedObjectModel:(NSManagedObjectModel *)newDefaultModel
 {
-    [newDefaultModel retain];
-    [defaultManagedObjectModel_ release];
 	defaultManagedObjectModel_ = newDefaultModel;
 }
 
@@ -38,7 +36,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 //deprecated
 + (NSManagedObjectModel *) MR_newManagedObjectModel 
 {
-    return [[self MR_mergedObjectModelFromMainBundle] retain];
+    return [self MR_mergedObjectModelFromMainBundle];
 }
 
 + (NSManagedObjectModel *) MR_newModelNamed:(NSString *) modelName inBundleNamed:(NSString *) bundleName
@@ -64,7 +62,7 @@ static NSManagedObjectModel *defaultManagedObjectModel_ = nil;
 
 + (NSManagedObjectModel *) MR_managedObjectModelNamed:(NSString *)modelFileName
 {
-	return [[self MR_newManagedObjectModelNamed:modelFileName] autorelease];
+	return [self MR_newManagedObjectModelNamed:modelFileName];
 }
 
 @end

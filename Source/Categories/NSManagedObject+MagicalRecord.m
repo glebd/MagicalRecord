@@ -118,7 +118,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
     
     for (NSString *attributeName in attributesToSortBy) 
     {
-        NSSortDescriptor *sortDescriptor = [[[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending] autorelease];
+        NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:attributeName ascending:ascending];
         [attributes addObject:sortDescriptor];
     }
     
@@ -140,7 +140,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	NSFetchRequest *request = [[NSFetchRequest alloc] init];
 	[request setEntity:[self entityDescriptionInContext:context]];
 	
-	return [request autorelease];	
+	return request;	
 }
 
 + (NSFetchRequest *)createFetchRequest
@@ -285,7 +285,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 {
 	NSFetchRequest *request = [self requestAllInContext:context];
 	
-	NSSortDescriptor *sortBy = [[[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending] autorelease];
+	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
 	
 	return request;
@@ -305,7 +305,7 @@ static NSUInteger defaultBatchSize = kMagicalRecordDefaultBatchSize;
 	[request setIncludesSubentities:NO];
 	[request setFetchBatchSize:[self defaultBatchSize]];
 	
-	NSSortDescriptor *sortBy = [[[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending] autorelease];
+	NSSortDescriptor *sortBy = [[NSSortDescriptor alloc] initWithKey:sortTerm ascending:ascending];
 	[request setSortDescriptors:[NSArray arrayWithObject:sortBy]];
 	
 	return request;

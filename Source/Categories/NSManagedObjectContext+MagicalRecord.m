@@ -23,8 +23,6 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
 
 + (void) setDefaultContext:(NSManagedObjectContext *)moc
 {
-    [moc retain];
-    [defaultManageObjectContext_ release];
     defaultManageObjectContext_ = moc;
 }
 
@@ -156,9 +154,9 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
         [self save];
     }
 #else
-    NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-    [self save];
-    [pool drain];
+    @autoreleasepool {
+        [self save];
+    }
 #endif
 }
 
@@ -202,7 +200,7 @@ static NSString const * kMagicalRecordManagedObjectContextKey = @"MagicalRecord_
     if (coordinator != nil)
 	{
         ARLog(@"Creating MOContext %@", [NSThread isMainThread] ? @" *** On Main Thread ***" : @"");
-        context = [[[NSManagedObjectContext alloc] init] autorelease];
+        context = [[NSManagedObjectContext alloc] init];
         [context setPersistentStoreCoordinator:coordinator];
     }
     return context;

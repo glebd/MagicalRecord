@@ -220,7 +220,7 @@ NSDate * adjustDateForDST(NSDate *date)
 
 NSDate * dateFromString(NSString *value, NSString *format)
 {
-    NSDateFormatter *formatter = [[[NSDateFormatter alloc] init] autorelease];
+    NSDateFormatter *formatter = [[NSDateFormatter alloc] init];
     [formatter setTimeZone:[NSTimeZone localTimeZone]];
     [formatter setLocale:[NSLocale currentLocale]];
     [formatter setDateFormat:format];

@@ -21,8 +21,6 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 
 + (void) MR_setDefaultPersistentStore:(NSPersistentStore *) store
 {
-    [store retain];
-    [defaultPersistentStore_ release];
 	defaultPersistentStore_ = store;
 }
 
@@ -53,7 +51,7 @@ static NSPersistentStore *defaultPersistentStore_ = nil;
 + (NSURL *) MR_urlForStoreName:(NSString *)storeFileName
 {
 	NSArray *paths = [NSArray arrayWithObjects:[self MR_applicationDocumentsDirectory], [self MR_applicationLibraryDirectory], nil];
-    NSFileManager *fm = [[[NSFileManager alloc] init] autorelease];
+    NSFileManager *fm = [[NSFileManager alloc] init];
 
     for (NSString *path in paths) 
     {
